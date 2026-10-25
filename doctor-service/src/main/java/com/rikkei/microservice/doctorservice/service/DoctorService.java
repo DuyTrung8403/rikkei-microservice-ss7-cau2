@@ -22,6 +22,12 @@ public class DoctorService {
                 .collect(Collectors.toList());
     }
 
+    public DoctorResponse getDoctorById(Long id) {
+        Doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bác sĩ với ID: " + id));
+        return mapToResponse(doctor);
+    }
+
     public DoctorResponse createDoctor(DoctorRequest request) {
         Doctor doctor = Doctor.builder()
                 .name(request.getName())

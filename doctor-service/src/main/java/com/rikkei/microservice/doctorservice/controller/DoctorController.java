@@ -29,6 +29,17 @@ public class DoctorController {
         return ResponseEntity.ok(baseResponse);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseResponse<DoctorResponse>> getDoctorById(@PathVariable Long id) {
+        DoctorResponse response = doctorService.getDoctorById(id);
+        BaseResponse<DoctorResponse> baseResponse = BaseResponse.<DoctorResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Lấy thông tin bác sĩ thành công")
+                .data(response)
+                .build();
+        return ResponseEntity.ok(baseResponse);
+    }
+
     @PostMapping
     public ResponseEntity<BaseResponse<DoctorResponse>> createDoctor(@RequestBody DoctorRequest request) {
         DoctorResponse response = doctorService.createDoctor(request);

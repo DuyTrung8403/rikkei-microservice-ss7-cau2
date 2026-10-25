@@ -26,4 +26,15 @@ public class PatientController {
                 .build();
         return new ResponseEntity<>(baseResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<BaseResponse<PatientResponse>> getPatientById(@PathVariable Long id) {
+        PatientResponse response = patientService.getPatientById(id);
+        BaseResponse<PatientResponse> baseResponse = BaseResponse.<PatientResponse>builder()
+                .status(HttpStatus.OK.value())
+                .message("Lấy thông tin bệnh nhân thành công")
+                .data(response)
+                .build();
+        return ResponseEntity.ok(baseResponse);
+    }
 }

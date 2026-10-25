@@ -28,6 +28,12 @@ public class PatientService {
         return mapToResponse(savedPatient);
     }
 
+    public PatientResponse getPatientById(Long id) {
+        Patient patient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bệnh nhân với ID: " + id));
+        return mapToResponse(patient);
+    }
+
     private PatientResponse mapToResponse(Patient patient) {
         return PatientResponse.builder()
                 .id(patient.getId())
